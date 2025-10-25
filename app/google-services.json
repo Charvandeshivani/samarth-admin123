@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "715602611479",
+    "project_id": "samarth-admin123",
+    "storage_bucket": "samarth-admin123.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715602611479:android:d30d4ac351aee856a87b52",
+        "android_client_info": {
+          "package_name": "com.example.samarth_admin123"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADwp3Btm7EjEc50NpbfMbOSDW57AxMTxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
