@@ -1,39 +1,44 @@
 package com.example.samarth_admin123
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.samarth_admin123.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
-    private var registeredEmail = ""
-    private var registeredPassword = ""
+    private lateinit var emailInput: EditText
+    private lateinit var passwordInput: EditText
+    private lateinit var loginBtn: Button
+    private lateinit var signupLink: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
 
-        // Inflate layout using ViewBinding
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        emailInput = findViewById(R.id.emailInput)
+        passwordInput = findViewById(R.id.passwordInput)
+        loginBtn = findViewById(R.id.loginBtn)
+        signupLink = findViewById(R.id.signupLink)
 
-        // Retrieve email and password from SignUpActivity (if any)
-        registeredEmail = intent.getStringExtra("email") ?: ""
-        registeredPassword = intent.getStringExtra("password") ?: ""
-
-        // Handle Login button click
-        binding.loginBtn.setOnClickListener {
-            val email = binding.emailEt.text.toString().trim()
-            val password = binding.passwordEt.text.toString().trim()
+        loginBtn.setOnClickListener {
+            val email = emailInput.text.toString().trim()
+            val password = passwordInput.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show()
-            } else if (email == registeredEmail && password == registeredPassword) {
-                Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
+                // Navigate to dashboard or main screen here
             }
+        }
+
+        signupLink.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
     }
 }

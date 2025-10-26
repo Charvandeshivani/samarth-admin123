@@ -2,38 +2,47 @@ package com.example.samarth_admin123
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.samarth_admin123.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var usernameInput: EditText
+    private lateinit var emailInput: EditText
+    private lateinit var passwordInput: EditText
+    private lateinit var registerBtn: Button
+    private lateinit var loginLink: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_signup)
 
-        // Inflate layout using ViewBinding
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        usernameInput = findViewById(R.id.usernameInput)
+        emailInput = findViewById(R.id.emailInput)
+        passwordInput = findViewById(R.id.passwordInput)
+        registerBtn = findViewById(R.id.registerBtn)
+        loginLink = findViewById(R.id.loginLink)
 
-        // Handle register button click
-        binding.registerBtn.setOnClickListener {
-            val username = binding.usernameEt.text.toString().trim()
-            val email = binding.emailEt.text.toString().trim()
-            val password = binding.passwordEt.text.toString().trim()
+        registerBtn.setOnClickListener {
+            val username = usernameInput.text.toString().trim()
+            val email = emailInput.text.toString().trim()
+            val password = passwordInput.text.toString().trim()
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
-                // Pass signup data to LoginActivity
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.putExtra("username", username)
-                intent.putExtra("email", email)
-                intent.putExtra("password", password)
-                startActivity(intent)
-                Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
+        }
+
+        loginLink.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 }

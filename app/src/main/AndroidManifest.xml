@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.samarth_admin123">
 
-    <!-- The package name must be unique and match your project's package name -->
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Samarth_admin123"
-        tools:targetApi="31">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <!--
-          This declares your MainActivity.
-          - The '.MainActivity' name is a shorthand that works because it's in the root package.
-          - The <intent-filter> block tells Android that this is the main entry point
-            and should appear in the phone's app launcher.
-        -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,12 +19,13 @@
             </intent-filter>
         </activity>
 
-        <!-- If you have other activities, like HomeActivity, you would declare them here. -->
-        <!--
         <activity
-            android:name=".HomeActivity"
+            android:name=".SignUpActivity"
             android:exported="false" />
-        -->
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
 
     </application>
 
