@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        <!-- ✅ Home / App Launcher -->
         <activity
             android:name=".HomeActivity"
             android:exported="true">
@@ -19,13 +20,28 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".SignUpActivity"
-            android:exported="false" />
+        <!-- ✅ Authentication screens -->
+        <activity android:name=".LoginActivity" android:exported="false" />
+        <activity android:name=".SignUpActivity" android:exported="false" />
 
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
+        <!-- ✅ Dashboard -->
+        <activity android:name=".DashboardActivity" android:exported="false" />
+
+        <!-- ✅ Orders System -->
+        <activity android:name=".OrdersActivity" android:exported="false" />
+        <activity android:name=".OrderDetailsActivity" android:exported="false" />
+        <activity android:name=".OrderStatusActivity" android:exported="false" />
+        <activity android:name=".PendingOrdersActivity" android:exported="false" />
+
+        <!-- ✅ Customers -->
+        <activity android:name=".CustomersActivity" android:exported="false" />
+        <activity android:name=".CustomerDetailsActivity" android:exported="false" />
+
+        <!-- ✅ Products -->
+        <activity android:name=".ProductsActivity" android:exported="false" />
+
+        <!-- ✅ Reports -->
+        <activity android:name=".ReportsActivity" android:exported="false" />
 
     </application>
 

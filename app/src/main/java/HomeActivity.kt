@@ -2,27 +2,33 @@ package com.example.samarth_admin123
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var signInBtn: Button
-    private lateinit var loginLink: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_home)
 
-        signInBtn = findViewById(R.id.signInBtn)
-        loginLink = findViewById(R.id.loginLink)
+        val session = SessionManager(this)
 
-        signInBtn.setOnClickListener {
+        // ✅ If already registered -> go to Login directly
+        if (session.isAdminRegistered()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
+        val btnSignUp: Button = findViewById(R.id.btnSignUp)
+        val btnLogin: Button = findViewById(R.id.btnLogin)
+
+        btnSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
-        loginLink.setOnClickListener {
+        btnLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }

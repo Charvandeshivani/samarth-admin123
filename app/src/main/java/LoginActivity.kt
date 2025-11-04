@@ -2,43 +2,33 @@ package com.example.samarth_admin123
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.samarth_admin123.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var emailInput: EditText
-    private lateinit var passwordInput: EditText
-    private lateinit var loginBtn: Button
-    private lateinit var signupLink: TextView
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        emailInput = findViewById(R.id.emailInput)
-        passwordInput = findViewById(R.id.passwordInput)
-        loginBtn = findViewById(R.id.loginBtn)
-        signupLink = findViewById(R.id.signupLink)
+        binding.loginBtn.setOnClickListener {
+            val email = binding.emailInput.text.toString().trim()
+            val password = binding.passwordInput.text.toString().trim()
 
-        loginBtn.setOnClickListener {
-            val email = emailInput.text.toString().trim()
-            val password = passwordInput.text.toString().trim()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                startActivity(Intent(this, DashboardActivity::class.java))
+                finish()
             } else {
-                Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                // Navigate to dashboard or main screen here
+                Toast.makeText(this, "Please enter email & password", Toast.LENGTH_SHORT).show()
             }
         }
 
-        signupLink.setOnClickListener {
+        binding.signupLink.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
         }
     }
 }

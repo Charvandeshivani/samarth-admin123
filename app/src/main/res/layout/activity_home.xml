@@ -2,48 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="24dp"
-    android:background="#F5F5F5">
+    android:background="#FFFFFF">
 
+    <!-- ✅ Logo Image -->
     <ImageView
-        android:id="@+id/homeLogo"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:id="@+id/appLogo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="24dp"
         android:src="@drawable/logo"
-        android:layout_gravity="center"
-        android:scaleType="fitCenter"
-        android:contentDescription="Samarth Logo" />
+        android:contentDescription="App Logo" />
 
+    <!-- ✅ App Title -->
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Samarth Electricals"
+        android:text="Samarth Admin Panel"
+        android:textColor="#4A148C"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:gravity="center"
-        android:layout_marginTop="24dp" />
+        android:layout_marginBottom="40dp" />
 
+    <!-- ✅ Login Button -->
     <Button
-        android:id="@+id/signInBtn"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Sign In"
-        android:textColor="#FFFFFF"
+        android:text="Login"
+        android:textSize="18sp"
         android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:backgroundTint="#6B4FA3"
-        android:layout_marginTop="40dp"
-        android:textSize="16sp" />
+        android:layout_marginBottom="16dp" />
 
-    <TextView
-        android:id="@+id/loginLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already signed in? Log In"
-        android:textColor="#00BCD4"
-        android:layout_marginTop="16dp"
-        android:textSize="14sp" />
+    <!-- ✅ Sign Up Button -->
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Sign Up"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#009688" />
 
 </LinearLayout>
