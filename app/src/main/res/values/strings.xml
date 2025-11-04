@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">samarth-admin123</string>
+    <string name="app_name">Samarth Admin</string>
+    <string name="admin_dashboard">Samarth Admin Dashboard</string>
+    <string name="orders">Orders</string>
+    <string name="products">Products</string>
+    <string name="customers">Customers</string>
+    <string name="reports">Reports</string>
+    <string name="add_product">Add Product</string>
 </resources>
