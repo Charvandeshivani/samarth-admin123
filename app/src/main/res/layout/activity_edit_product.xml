@@ -3,37 +3,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F9F9F9">
 
-    <EditText
-        android:id="@+id/editName"
-        android:hint="Product Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Product"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginBottom="24dp"/>
 
-    <EditText
-        android:id="@+id/editPrice"
-        android:hint="Price"
-        android:inputType="numberDecimal"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
 
-    <EditText
-        android:id="@+id/editDescription"
-        android:hint="Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/etProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Name"
+            android:padding="12dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editStock"
-        android:hint="Stock"
-        android:inputType="number"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
 
-    <Button
-        android:id="@+id/btnSaveChanges"
-        android:text="Save Changes"
+        <EditText
+            android:id="@+id/etProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price (₹)"
+            android:inputType="numberDecimal"
+            android:padding="12dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <EditText
+            android:id="@+id/etProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:minLines="3"
+            android:gravity="top"
+            android:padding="12dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+
+        <EditText
+            android:id="@+id/etProductStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stock Quantity"
+            android:inputType="number"
+            android:padding="12dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Update"
+            android:backgroundTint="#673AB7"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:backgroundTint="#9E9E9E"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
 </LinearLayout>
