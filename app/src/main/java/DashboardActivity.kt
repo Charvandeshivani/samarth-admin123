@@ -14,7 +14,7 @@ class DashboardActivity : AppCompatActivity() {
         val cardOrders: CardView = findViewById(R.id.cardOrders)
         val cardProducts: CardView = findViewById(R.id.cardProducts)
         val cardCustomers: CardView = findViewById(R.id.cardCustomers)
-        val cardReports: CardView = findViewById(R.id.cardReports)
+
 
         cardOrders.setOnClickListener {
             startActivity(Intent(this, OrdersActivity::class.java))
@@ -28,8 +28,6 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, CustomersActivity::class.java))
         }
 
-        cardReports.setOnClickListener {
-            startActivity(Intent(this, ReportsActivity::class.java))
-        }
+
     }
 }
