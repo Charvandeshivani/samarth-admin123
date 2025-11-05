@@ -43,7 +43,7 @@
         <activity android:name=".EditProductActivity" android:exported="false" />
 
         <!-- ✅ Reports -->
-        <activity android:name=".ReportsActivity" android:exported="false" />
+
 
     </application>
 
