@@ -1,66 +1,96 @@
 package com.example.samarth_admin123
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.samarth_admin123.databinding.ActivityEditProductBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
 class EditProductActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityEditProductBinding
-    private lateinit var firestore: FirebaseFirestore
-    private var productId: String = ""
+    private lateinit var db: FirebaseFirestore
+    private lateinit var etProductName: EditText
+    private lateinit var etProductPrice: EditText
+    private lateinit var etProductDescription: EditText
+    private lateinit var etProductStock: EditText
+    private lateinit var btnUpdate: Button
+    private lateinit var btnCancel: Button
+
+    private var originalProductName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditProductBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_edit_product)
 
-        firestore = FirebaseFirestore.getInstance()
+        db = FirebaseFirestore.getInstance()
 
-        productId = intent.getStringExtra("productId") ?: ""
+        // Initialize views
+        etProductName = findViewById(R.id.etProductName)
+        etProductPrice = findViewById(R.id.etProductPrice)
+        etProductDescription = findViewById(R.id.etProductDescription)
+        etProductStock = findViewById(R.id.etProductStock)
+        btnUpdate = findViewById(R.id.btnUpdate)
+        btnCancel = findViewById(R.id.btnCancel)
 
-        loadProduct()
+        // Get product details from intent
+        originalProductName = intent.getStringExtra("PRODUCT_NAME") ?: ""
+        val productPrice = intent.getDoubleExtra("PRODUCT_PRICE", 0.0)
+        val productDescription = intent.getStringExtra("PRODUCT_DESCRIPTION") ?: ""
+        val productStock = intent.getIntExtra("PRODUCT_STOCK", 0)
 
-        binding.btnUpdate.setOnClickListener {
+        // Set current values
+        etProductName.setText(originalProductName)
+        etProductPrice.setText(productPrice.toString())
+        etProductDescription.setText(productDescription)
+        etProductStock.setText(productStock.toString())
+
+        // Update button click
+        btnUpdate.setOnClickListener {
             updateProduct()
+        }
+
+        // Cancel button click
+        btnCancel.setOnClickListener {
+            finish()
         }
     }
 
-    private fun loadProduct() {
-        if (productId.isEmpty()) return
-
-        firestore.collection("Products")
-            .document(productId)
-            .get()
-            .addOnSuccessListener { doc ->
-                binding.etName.setText(doc.getString("name"))
-                binding.etPrice.setText(doc.get("price").toString())
-                binding.etDescription.setText(doc.getString("description"))
-            }
-    }
-
     private fun updateProduct() {
-        val name = binding.etName.text.toString()
-        val price = binding.etPrice.text.toString().toDouble()
-        val description = binding.etDescription.text.toString()
+        val name = etProductName.text.toString().trim()
+        val priceText = etProductPrice.text.toString().trim()
+        val description = etProductDescription.text.toString().trim()
+        val stockText = etProductStock.text.toString().trim()
 
-        val productMap = hashMapOf(
+        if (name.isEmpty() || priceText.isEmpty() || description.isEmpty() || stockText.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val price = priceText.toDoubleOrNull()
+        val stock = stockText.toIntOrNull()
+
+        if (price == null || stock == null) {
+            Toast.makeText(this, "Invalid price or stock value", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Update in Firestore (using name as document ID)
+        val productData = hashMapOf(
             "name" to name,
             "price" to price,
-            "description" to description
+            "description" to description,
+            "stock" to stock
         )
 
-        firestore.collection("Products")
-            .document(productId)
-            .update(productMap as Map<String, Any>)
+        db.collection("products").document(originalProductName)
+            .update(productData as Map<String, Any>)
             .addOnSuccessListener {
-                Toast.makeText(this, "Product Updated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Product updated successfully", Toast.LENGTH_SHORT).show()
                 finish()
             }
-            .addOnFailureListener {
-                Toast.makeText(this, "Update Failed", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
