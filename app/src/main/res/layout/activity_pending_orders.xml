@@ -2,11 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:text="Pending Orders Screen"
+        android:text="Pending Orders"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:paddingBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerPendingOrders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tvNoPending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Pending Orders"
+        android:textSize="18sp"
+        android:textColor="#888"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:paddingTop="20dp"/>
+
 </LinearLayout>

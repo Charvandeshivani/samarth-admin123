@@ -1,30 +1,29 @@
 package com.example.samarth_admin123
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.samarth_admin123.databinding.ItemOrderBinding
 
-class OrdersAdapter(private val orderList: List<Order>) :
-    RecyclerView.Adapter<OrdersAdapter.OrderViewHolder>() {
+class OrderAdapter(private val orders: List<Order>) :
+    RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
-    class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val orderId: TextView = itemView.findViewById(android.R.id.text1)
-        val price: TextView = itemView.findViewById(android.R.id.text2)
-    }
+    inner class OrderViewHolder(val binding: ItemOrderBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(android.R.layout.simple_list_item_2, parent, false)
-        return OrderViewHolder(view)
+        val binding = ItemOrderBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return OrderViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        val order = orderList[position]
-        holder.orderId.text = "Order No: ${order.orderId}"
-        holder.price.text = "₹${order.price} - ${order.date}"
+        val order = orders[position]
+        holder.binding.txtCustomerName.text = order.customerName
+        holder.binding.txtTotal.text = "₹ ${order.totalAmount}"
+        holder.binding.txtStatus.text = order.status
     }
 
-    override fun getItemCount(): Int = orderList.size
+    override fun getItemCount() = orders.size
 }
