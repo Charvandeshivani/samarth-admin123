@@ -26,24 +26,26 @@ class ProductsActivity : AppCompatActivity() {
         binding.recyclerViewProducts.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewProducts.adapter = adapter
 
-        // ✅ Add sample products (temporary demo data)
-        productList.addAll(
-            listOf(
-                Product("Power Drill", 2499.0),
-                Product("Angle Grinder", 2199.0),
-                Product("Electric Saw", 4999.0),
-                Product("Impact Wrench", 5499.0)
+        // ✅ Add sample demo products once
+        if (productList.isEmpty()) {
+            productList.addAll(
+                listOf(
+                    Product("Power Drill", 2499.0),
+                    Product("Angle Grinder", 2199.0),
+                    Product("Electric Saw", 4999.0),
+                    Product("Impact Wrench", 5499.0)
+                )
             )
-        )
-        adapter.notifyDataSetChanged()
+            adapter.notifyDataSetChanged()
+        }
 
-        // ✅ Add Product button click
+        // ✅ Add Product button
         binding.btnAddProduct.setOnClickListener {
             showAddProductDialog()
         }
     }
 
-    // ✅ Add new product dialog
+    // ✅ Show dialog to add a new product
     private fun showAddProductDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_product, null)
         val nameInput = dialogView.findViewById<android.widget.EditText>(R.id.etProductName)
@@ -59,7 +61,7 @@ class ProductsActivity : AppCompatActivity() {
                 if (name.isNotEmpty()) {
                     val newProduct = Product(name, price)
 
-                    // ✅ Add product efficiently (no full refresh)
+                    // ✅ Add at bottom, keep old items, scroll to new one
                     productList.add(newProduct)
                     adapter.notifyItemInserted(productList.size - 1)
                     binding.recyclerViewProducts.scrollToPosition(productList.size - 1)
@@ -71,10 +73,12 @@ class ProductsActivity : AppCompatActivity() {
             .show()
     }
 
+    // ✅ Edit Product (placeholder)
     private fun editProduct(product: Product) {
         android.widget.Toast.makeText(this, "Edit: ${product.name}", android.widget.Toast.LENGTH_SHORT).show()
     }
 
+    // ✅ Delete Product
     private fun deleteProduct(product: Product) {
         val index = productList.indexOf(product)
         if (index != -1) {
