@@ -29,7 +29,6 @@
 
         <!-- ✅ Orders System -->
         <activity android:name=".OrdersActivity" android:exported="false" />
-        <activity android:name=".OrderDetailsActivity" android:exported="false" />
         <activity android:name=".OrderStatusActivity" android:exported="false" />
         <activity android:name=".PendingOrdersActivity" android:exported="false" />
 
