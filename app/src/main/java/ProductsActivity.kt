@@ -73,9 +73,36 @@ class ProductsActivity : AppCompatActivity() {
             .show()
     }
 
-    // ✅ Edit Product (placeholder)
+    // ✅ Edit Product (updated version)
     private fun editProduct(product: Product) {
-        android.widget.Toast.makeText(this, "Edit: ${product.name}", android.widget.Toast.LENGTH_SHORT).show()
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_product, null)
+        val nameInput = dialogView.findViewById<android.widget.EditText>(R.id.etProductName)
+        val priceInput = dialogView.findViewById<android.widget.EditText>(R.id.etProductPrice)
+
+        // Pre-fill current product details
+        nameInput.setText(product.name)
+        priceInput.setText(product.price.toString())
+
+        AlertDialog.Builder(this)
+            .setTitle("Edit Product")
+            .setView(dialogView)
+            .setPositiveButton("Update") { dialog, _ ->
+                val newName = nameInput.text.toString().trim()
+                val newPrice = priceInput.text.toString().toDoubleOrNull() ?: 0.0
+
+                if (newName.isNotEmpty()) {
+                    val index = productList.indexOf(product)
+                    if (index != -1) {
+                        // ✅ Update product in list
+                        productList[index] = Product(newName, newPrice)
+                        adapter.notifyItemChanged(index)
+                    }
+                }
+
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     // ✅ Delete Product
