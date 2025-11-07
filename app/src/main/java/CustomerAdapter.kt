@@ -1,44 +1,30 @@
 package com.example.samarth_admin123
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.samarth_admin123.databinding.ItemCustomerBinding
 
-class CustomerAdapter(private val customers: List<Customer>) :
+class CustomerAdapter(private val list: List<Customer>) :
     RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
 
-    inner class CustomerViewHolder(val binding: ItemCustomerBinding) :
-        RecyclerView.ViewHolder(binding.root)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
-        val binding = ItemCustomerBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
-        return CustomerViewHolder(binding)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_customer, parent, false)
+        return CustomerViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
-        val customer = customers[position]
-
-        holder.binding.txtCustomerName.text = customer.name
-        holder.binding.txtCustomerPhone.text = customer.phone
-
-        holder.binding.btnCall.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:${customer.phone}")
-            holder.itemView.context.startActivity(intent)
-        }
-
-        holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, CustomerDetailsActivity::class.java)
-            intent.putExtra("name", customer.name)
-            intent.putExtra("phone", customer.phone)
-            holder.itemView.context.startActivity(intent)
-        }
+        val customer = list[position]
+        holder.name.text = customer.name
+        holder.phone.text = "Phone: ${customer.phone}"
     }
 
-    override fun getItemCount(): Int = customers.size
+    override fun getItemCount(): Int = list.size
+
+    class CustomerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val name: TextView = itemView.findViewById(R.id.txtCustomerName)
+        val phone: TextView = itemView.findViewById(R.id.txtCustomerPhone)
+    }
 }

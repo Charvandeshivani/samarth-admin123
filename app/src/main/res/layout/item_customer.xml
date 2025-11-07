@@ -2,16 +2,16 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_margin="10dp"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     cardView:cardCornerRadius="12dp"
     cardView:cardElevation="6dp">
 
     <LinearLayout
-        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/txtCustomerName"
@@ -25,16 +25,9 @@
             android:id="@+id/txtCustomerPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="9876543210"
-            android:layout_marginTop="4dp"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/btnCall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Call"
-            android:layout_marginTop="10dp" />
+            android:text="Phone"
+            android:paddingTop="6dp"
+            android:textColor="#444" />
 
     </LinearLayout>
 

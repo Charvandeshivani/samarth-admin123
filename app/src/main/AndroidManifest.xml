@@ -27,9 +27,8 @@
         <!-- ✅ Dashboard -->
         <activity android:name=".DashboardActivity" android:exported="false" />
 
-        <!-- ✅ Orders System -->
+        <!-- ✅ Orders screens -->
         <activity android:name=".OrdersActivity" android:exported="false" />
-        <activity android:name=".OrderDetailsActivity" android:exported="false" />
         <activity android:name=".OrderStatusActivity" android:exported="false" />
         <activity android:name=".PendingOrdersActivity" android:exported="false" />
 
@@ -41,9 +40,6 @@
         <activity android:name=".ProductsActivity" android:exported="false" />
         <activity android:name=".ProductDetailsActivity" android:exported="false" />
         <activity android:name=".EditProductActivity" android:exported="false" />
-
-        <!-- ✅ Reports -->
-
 
     </application>
 
