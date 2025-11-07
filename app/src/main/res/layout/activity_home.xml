@@ -13,7 +13,7 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginBottom="24dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/samarthadminlogo"
         android:contentDescription="App Logo" />
 
     <!-- ✅ App Title -->
@@ -21,7 +21,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Samarth Admin Panel"
+        android:text="Samarth Admin "
         android:textColor="#4A148C"
         android:textSize="26sp"
         android:textStyle="bold"
