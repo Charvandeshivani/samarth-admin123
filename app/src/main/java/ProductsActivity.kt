@@ -17,24 +17,33 @@ class ProductsActivity : AppCompatActivity() {
         binding = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up RecyclerView
-        adapter = ProductAdapter(productList, { product -> editProduct(product) }, { product -> deleteProduct(product) })
+        // ✅ Setup RecyclerView
+        adapter = ProductAdapter(
+            productList,
+            onEditClick = { product -> editProduct(product) },
+            onDeleteClick = { product -> deleteProduct(product) }
+        )
         binding.recyclerViewProducts.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewProducts.adapter = adapter
 
-        // Add some sample products (so the screen shows data)
-        productList.add(Product("Power Drill", 2499.0))
-        productList.add(Product("Angle Grinder", 2199.0))
-        productList.add(Product("Electric Saw", 4999.0))
-        productList.add(Product("Impact Wrench", 5499.0))
+        // ✅ Add sample products (temporary demo data)
+        productList.addAll(
+            listOf(
+                Product("Power Drill", 2499.0),
+                Product("Angle Grinder", 2199.0),
+                Product("Electric Saw", 4999.0),
+                Product("Impact Wrench", 5499.0)
+            )
+        )
         adapter.notifyDataSetChanged()
 
-        // Add product button click
+        // ✅ Add Product button click
         binding.btnAddProduct.setOnClickListener {
             showAddProductDialog()
         }
     }
 
+    // ✅ Add new product dialog
     private fun showAddProductDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_product, null)
         val nameInput = dialogView.findViewById<android.widget.EditText>(R.id.etProductName)
@@ -44,12 +53,18 @@ class ProductsActivity : AppCompatActivity() {
             .setTitle("Add New Product")
             .setView(dialogView)
             .setPositiveButton("Add") { dialog, _ ->
-                val name = nameInput.text.toString()
+                val name = nameInput.text.toString().trim()
                 val price = priceInput.text.toString().toDoubleOrNull() ?: 0.0
+
                 if (name.isNotEmpty()) {
-                    productList.add(Product(name, price))
-                    adapter.notifyDataSetChanged()
+                    val newProduct = Product(name, price)
+
+                    // ✅ Add product efficiently (no full refresh)
+                    productList.add(newProduct)
+                    adapter.notifyItemInserted(productList.size - 1)
+                    binding.recyclerViewProducts.scrollToPosition(productList.size - 1)
                 }
+
                 dialog.dismiss()
             }
             .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
@@ -57,12 +72,14 @@ class ProductsActivity : AppCompatActivity() {
     }
 
     private fun editProduct(product: Product) {
-        // For now, just show a toast
         android.widget.Toast.makeText(this, "Edit: ${product.name}", android.widget.Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteProduct(product: Product) {
-        productList.remove(product)
-        adapter.notifyDataSetChanged()
+        val index = productList.indexOf(product)
+        if (index != -1) {
+            productList.removeAt(index)
+            adapter.notifyItemRemoved(index)
+        }
     }
 }
