@@ -67,7 +67,7 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_orders"
+                        android:src="@drawable/shop"
                         app:tint="#673AB7" />
 
                     <TextView
@@ -102,7 +102,7 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_products"
+                        android:src="@drawable/product"
                         app:tint="#673AB7" />
 
                     <TextView
@@ -146,7 +146,7 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_customers"
+                        android:src="@drawable/person"
                         app:tint="#673AB7" />
 
                     <TextView
